@@ -1,4 +1,15 @@
+import { useState, useEffect } from "react";
+import { MysticStarIcon } from "./MysticIcons";
+
 export default function Hero() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleWhatsAppClick = () => {
     window.open(
       "https://wa.me/tunumerodetelefono?text=Hola,%20me%20interesa%20una%20consulta",
@@ -14,25 +25,39 @@ export default function Hero() {
       {/* Efectos de fondo */}
       <div className="absolute inset-0 bg-mystic-radial opacity-50"></div>
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-mystic-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+        <div
+          className="absolute top-20 left-10 w-72 h-72 bg-mystic-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
+          style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+        ></div>
         <div
           className="absolute top-40 right-20 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
-          style={{ animationDelay: "2s" }}
+          style={{
+            animationDelay: "2s",
+            transform: `translateY(${scrollY * 0.5}px)`,
+          }}
         ></div>
         <div
           className="absolute bottom-20 left-1/3 w-80 h-80 bg-mystic-800 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"
-          style={{ animationDelay: "4s" }}
+          style={{
+            animationDelay: "4s",
+            transform: `translateY(${scrollY * 0.2}px)`,
+          }}
         ></div>
       </div>
 
       {/* Contenido */}
-      <div className="container mx-auto px-6 relative z-10">
+      <div
+        className="container mx-auto px-6 relative z-10"
+        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+      >
         <div className="text-center max-w-4xl mx-auto">
-          <div className="mb-8 animate-pulse-glow inline-block">
-            <span className="text-8xl">✨</span>
+          <div className="mb-8 flex justify-center">
+            <div className="text-mystic-300 drop-shadow-[0_0_20px_rgba(139,92,246,0.6)]">
+              <MysticStarIcon />
+            </div>
           </div>
 
-          <h2 className="font-serif text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-mystic-400 via-purple-300 to-mystic-500">
+          <h2 className="font-serif text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-mystic-400 via-purple-300 to-mystic-500 animate-gradient">
             Bienvenido al Mundo Místico
           </h2>
 

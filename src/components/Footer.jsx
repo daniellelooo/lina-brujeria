@@ -95,12 +95,6 @@ export default function Footer() {
               © {currentYear} Lina - Servicios Místicos. Todos los derechos
               reservados.
             </p>
-
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <span>Hecho con</span>
-              <span className="text-mystic-500">✨</span>
-              <span>y magia</span>
-            </div>
           </div>
         </div>
       </div>

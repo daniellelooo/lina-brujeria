@@ -5,6 +5,7 @@ import Services from "./components/Services";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import StarField from "./components/StarField";
 
 function App() {
   return (
@@ -40,7 +41,8 @@ function App() {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-mystic-gradient">
+      <div className="min-h-screen bg-mystic-gradient overflow-hidden">
+        <StarField />
         <Header />
         <Hero />
         <About />

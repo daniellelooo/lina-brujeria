@@ -1,27 +1,33 @@
+import { MoonIcon, SparklesIcon, CrystalBallIcon } from "./MysticIcons";
+
 export default function About() {
   return (
     <section id="sobre-mi" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="section-title text-center mb-12">Sobre Mí</h2>
+          <h2 className="section-title text-center mb-12 animate-gradient">
+            Sobre Mí
+          </h2>
 
-          <div className="card-mystic">
+          <div className="card-glass hover-shine">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="flex justify-center">
-                <div className="relative">
-                  <div className="w-64 h-64 rounded-full bg-gradient-to-br from-mystic-600 to-purple-700 p-1 animate-pulse-glow">
-                    <div className="w-full h-full rounded-full bg-dark-200 flex items-center justify-center">
-                      <span className="text-8xl">🌙</span>
+                <div className="relative group">
+                  <div className="w-64 h-64 rounded-full bg-gradient-to-br from-mystic-600 via-purple-600 to-mystic-700 p-1 animate-pulse-glow group-hover:scale-105 transition-transform duration-500">
+                    <div className="w-full h-full rounded-full bg-dark-200/80 backdrop-blur-sm flex items-center justify-center text-mystic-300">
+                      <div className="group-hover:scale-110 transition-transform duration-500">
+                        <MoonIcon />
+                      </div>
                     </div>
                   </div>
-                  <div className="absolute -top-4 -right-4 text-4xl animate-float">
-                    ✨
+                  <div className="absolute -top-4 -right-4 animate-float drop-shadow-glow text-mystic-300">
+                    <SparklesIcon />
                   </div>
                   <div
-                    className="absolute -bottom-4 -left-4 text-4xl animate-float"
+                    className="absolute -bottom-4 -left-4 animate-float drop-shadow-glow text-mystic-400"
                     style={{ animationDelay: "2s" }}
                   >
-                    🔮
+                    <CrystalBallIcon className="w-12 h-12" />
                   </div>
                 </div>
               </div>
