@@ -72,7 +72,7 @@ export default function Services() {
   const handleWhatsAppClick = (service) => {
     const message = `Hola, me interesa el servicio de ${service}`;
     window.open(
-      `https://wa.me/tunumerodetelefono?text=${encodeURIComponent(message)}`,
+      `https://wa.me/3115807057?text=${encodeURIComponent(message)}`,
       "_blank",
     );
   };
