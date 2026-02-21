@@ -104,3 +104,19 @@
 .hover-shine:hover {
   animation: shine 1.5s ease-in-out;
 }
+
+/* Animación slide-up para FloatingCTA */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out;
+}

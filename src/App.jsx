@@ -1,23 +1,26 @@
 import { Helmet } from "react-helmet-async";
+import { useLanguage } from "./context/LanguageContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import About from "./components/About";
+import Testimonials from "./components/Testimonials";
+import Process from "./components/Process";
+import Gallery from "./components/Gallery";
+import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import FloatingCTA from "./components/FloatingCTA";
 import StarField from "./components/StarField";
 
 function App() {
+  const { t, language } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>
-          Lina - Servicios Místicos y Espirituales | Tarot, Brujería y Rituales
-        </title>
-        <meta
-          name="description"
-          content="Descubre servicios profesionales de brujería, tarot, limpias energéticas y rituales personalizados. Consultas místicas con Lina para resolver tus inquietudes espirituales."
-        />
+        <title>{t.meta.title}</title>
+        <meta name="description" content={t.meta.description} />
         <link rel="canonical" href="https://tudominio.com" />
 
         {/* Schema.org JSON-LD */}
@@ -25,18 +28,18 @@ function App() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "Lina - Servicios Místicos",
-            description:
-              "Servicios profesionales de brujería, tarot, limpias energéticas y rituales personalizados",
+            name:
+              language === "es"
+                ? "Lina - Servicios Místicos"
+                : "Lina - Mystic Services",
+            description: t.meta.description,
             priceRange: "$$",
-            serviceType: [
-              "Tarot",
-              "Brujería",
-              "Rituales",
-              "Limpias Energéticas",
-            ],
+            serviceType:
+              language === "es"
+                ? ["Tarot", "Brujería", "Rituales", "Limpias Energéticas"]
+                : ["Tarot", "Witchcraft", "Rituals", "Energy Cleansing"],
             areaServed: "Online",
-            availableLanguage: "es",
+            availableLanguage: [language],
           })}
         </script>
       </Helmet>
@@ -46,9 +49,14 @@ function App() {
         <Header />
         <Hero />
         <About />
+        <Process />
         <Services />
+        <Testimonials />
+        <Gallery />
+        <FAQ />
         <Footer />
         <WhatsAppButton />
+        <FloatingCTA />
       </div>
     </>
   );

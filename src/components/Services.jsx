@@ -6,93 +6,44 @@ import {
   ProtectionIcon,
   BathIcon,
 } from "./MysticIcons";
-
-const services = [
-  {
-    icon: TarotIcon,
-    title: "Lectura de Tarot",
-    description:
-      "Descubre lo que el futuro te depara con una lectura personalizada de tarot. Orientación clara para tus decisiones.",
-    features: [
-      "Lectura completa",
-      "Interpretación detallada",
-      "Consejos personalizados",
-    ],
-  },
-  {
-    icon: CleansingIcon,
-    title: "Limpias Energéticas",
-    description:
-      "Elimina energías negativas y bloqueos que impiden tu crecimiento. Renueva tu aura y atrae prosperidad.",
-    features: [
-      "Limpieza profunda",
-      "Protección energética",
-      "Equilibrio espiritual",
-    ],
-  },
-  {
-    icon: LoveIcon,
-    title: "Rituales de Amor",
-    description:
-      "Atrae el amor verdadero o fortalece tu relación actual con rituales poderosos y efectivos.",
-    features: [
-      "Atracción amorosa",
-      "Unión de parejas",
-      "Rituales personalizados",
-    ],
-  },
-  {
-    icon: ProsperityIcon,
-    title: "Rituales de Prosperidad",
-    description:
-      "Abre los caminos hacia la abundancia y el éxito en tus proyectos financieros y profesionales.",
-    features: ["Atracción de dinero", "Éxito laboral", "Negocios prósperos"],
-  },
-  {
-    icon: ProtectionIcon,
-    title: "Protección Espiritual",
-    description:
-      "Protege tu hogar y seres queridos de malas energías, envidias y trabajos negativos.",
-    features: ["Protección del hogar", "Escudo energético", "Defensa psíquica"],
-  },
-  {
-    icon: BathIcon,
-    title: "Baños Espirituales",
-    description:
-      "Baños rituales con hierbas sagradas para purificación, suerte y apertura de caminos.",
-    features: [
-      "Purificación total",
-      "Suerte y fortuna",
-      "Renovación espiritual",
-    ],
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Services() {
-  const handleWhatsAppClick = (service) => {
-    const message = `Hola, me interesa el servicio de ${service}`;
+  const { t, language } = useLanguage();
+
+  const handleWhatsAppClick = (serviceIndex) => {
+    const serviceName = t.services.list[serviceIndex].title;
+    const message = `${t.services.whatsappMessage} ${serviceName}`;
     window.open(
       `https://wa.me/573115807057?text=${encodeURIComponent(message)}`,
       "_blank",
     );
   };
 
+  const icons = [
+    TarotIcon,
+    CleansingIcon,
+    LoveIcon,
+    ProsperityIcon,
+    ProtectionIcon,
+    BathIcon,
+  ];
+
   return (
     <section id="servicios" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="section-title mb-4 animate-gradient">
-            Servicios Místicos
+            {t.services.title}
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Cada servicio es personalizado según tus necesidades específicas.
-            Trabajamos juntos para lograr tus objetivos espirituales.
+            {t.services.subtitle}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
+          {t.services.list.map((service, index) => {
+            const IconComponent = icons[index];
             return (
               <div
                 key={index}
@@ -135,10 +86,10 @@ export default function Services() {
                 </ul>
 
                 <button
-                  onClick={() => handleWhatsAppClick(service.title)}
+                  onClick={() => handleWhatsAppClick(index)}
                   className="w-full bg-gradient-to-r from-mystic-700 to-mystic-600 hover:from-mystic-600 hover:to-mystic-500 text-white py-3 rounded-lg transition-all duration-300 font-semibold shadow-lg hover:shadow-mystic"
                 >
-                  Consultar
+                  {t.services.contactButton}
                 </button>
               </div>
             );
@@ -148,17 +99,31 @@ export default function Services() {
         <div className="mt-16 text-center">
           <div className="card-glass max-w-3xl mx-auto hover-shine">
             <h3 className="text-2xl font-serif font-bold text-mystic-300 mb-4">
-              ¿No encuentras lo que buscas?
+              {language === "es"
+                ? "¿No encuentras lo que buscas?"
+                : "Can't find what you're looking for?"}
             </h3>
             <p className="text-gray-300 mb-6">
-              Cada situación es única. Contáctame para una consulta
-              personalizada y encuentra la solución que necesitas.
+              {language === "es"
+                ? "Cada situación es única. Contáctame para una consulta personalizada y encuentra la solución que necesitas."
+                : "Every situation is unique. Contact me for a personalized consultation and find the solution you need."}
             </p>
             <button
-              onClick={() => handleWhatsAppClick("Consulta Personalizada")}
+              onClick={() => {
+                const message =
+                  language === "es"
+                    ? "Hola, me interesa una consulta personalizada"
+                    : "Hello, I'm interested in a personalized consultation";
+                window.open(
+                  `https://wa.me/573115807057?text=${encodeURIComponent(message)}`,
+                  "_blank",
+                );
+              }}
               className="btn-primary"
             >
-              Consulta Personalizada
+              {language === "es"
+                ? "Consulta Personalizada"
+                : "Personalized Consultation"}
             </button>
           </div>
         </div>

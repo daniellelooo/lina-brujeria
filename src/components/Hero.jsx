@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { MysticStarIcon } from "./MysticIcons";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -11,8 +13,12 @@ export default function Hero() {
   }, []);
 
   const handleWhatsAppClick = () => {
+    const message =
+      language === "es"
+        ? "Hola, me interesa una consulta"
+        : "Hello, I'm interested in a consultation";
     window.open(
-      "https://wa.me/573115807057?text=Hola,%20me%20interesa%20una%20consulta",
+      `https://wa.me/573115807057?text=${encodeURIComponent(message)}`,
       "_blank",
     );
   };
@@ -58,20 +64,20 @@ export default function Hero() {
           </div>
 
           <h2 className="font-serif text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-mystic-400 via-purple-300 to-mystic-500 animate-gradient">
-            Bienvenido al Mundo Místico
+            {t.hero.title}
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Descubre el poder ancestral de la brujería y los rituales.
+            {t.hero.subtitle}
             <span className="block mt-2 text-mystic-300 font-semibold">
-              Transforma tu destino con sabiduría milenaria
+              {t.hero.subtitle2}
             </span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button onClick={handleWhatsAppClick} className="btn-primary group">
               <span className="flex items-center gap-2">
-                Consulta Ahora
+                {t.hero.consultButton}
                 <svg
                   className="w-5 h-5 group-hover:translate-x-1 transition-transform"
                   fill="currentColor"
@@ -86,7 +92,7 @@ export default function Hero() {
               href="#servicios"
               className="text-mystic-300 hover:text-mystic-200 font-semibold flex items-center gap-2 transition-colors"
             >
-              Ver Servicios
+              {t.hero.viewServices}
               <svg
                 className="w-5 h-5"
                 fill="none"
